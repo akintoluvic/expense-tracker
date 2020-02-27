@@ -14,10 +14,20 @@ const initialState = {
 // Create Context
 export const GlobalContext = createContext(initialState);
 
+
+
 // Provider Component
 export const GlobalProvider = ({ children  }) => {
     const [ state, dispatch ] = useReducer(AppReducer, initialState);
 
+    // Actions
+    function deleteTransaction(id) {
+        dispatch({
+            type: 'DELETE_TRANSACTION',
+            payload: id
+        });
+    }
+    
     return (<GlobalContext.Provider value={{ transactions: state.transactions }}>
         { children }
     </GlobalContext.Provider>)
